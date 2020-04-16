@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7d3a2ee4.chunk.css",
+    "main.js": "/static/js/main.3afc5d70.chunk.js",
+    "main.js.map": "/static/js/main.3afc5d70.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.784c586e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.784c586e.js.map",
+    "static/css/2.a43b59a1.chunk.css": "/static/css/2.a43b59a1.chunk.css",
+    "static/js/2.1e374482.chunk.js": "/static/js/2.1e374482.chunk.js",
+    "static/js/2.1e374482.chunk.js.map": "/static/js/2.1e374482.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.a118be5fddfeffeab6ed5a906adceca3.js": "/precache-manifest.a118be5fddfeffeab6ed5a906adceca3.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.a43b59a1.chunk.css.map": "/static/css/2.a43b59a1.chunk.css.map",
+    "static/css/main.7d3a2ee4.chunk.css.map": "/static/css/main.7d3a2ee4.chunk.css.map",
+    "static/js/2.1e374482.chunk.js.LICENSE.txt": "/static/js/2.1e374482.chunk.js.LICENSE.txt",
+    "static/media/india.svg": "/static/media/india.2d44de26.svg",
+    "static/media/italy.svg": "/static/media/italy.3d141447.svg",
+    "static/media/nepal.svg": "/static/media/nepal.d1386c42.svg",
+    "static/media/spain.svg": "/static/media/spain.c06563a7.svg",
+    "static/media/usa.svg": "/static/media/usa.a035edad.svg",
+    "static/media/world .svg": "/static/media/world .11093ee1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.784c586e.js",
+    "static/css/2.a43b59a1.chunk.css",
+    "static/js/2.1e374482.chunk.js",
+    "static/css/main.7d3a2ee4.chunk.css",
+    "static/js/main.3afc5d70.chunk.js"
+  ]
+}

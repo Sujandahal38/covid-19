@@ -97,7 +97,7 @@ export default function NepalInfo(props) {
                       </Toolbar>
                       <Toolbar>
                         <Typography className={classes.rightData}>
-                          इसोलेसनमा रखिएको :
+                        आइसोलेसनमा रखिएको :
                         </Typography>
 
                         <Typography color="primary" className={classes.numbers}>
