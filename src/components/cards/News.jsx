@@ -45,7 +45,7 @@ export default function News(props) {
     {!props.hideHeader ?
       <Paper className={classes.holder}>
         <Toolbar className={classes.header}>
-          <Typography variant="h6">समाचारहरु </Typography>
+          <Typography style={{color: 'white'}} variant="h6">समाचारहरु </Typography>
         </Toolbar>
       </Paper>
    : null}
