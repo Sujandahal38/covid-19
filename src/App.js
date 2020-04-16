@@ -13,6 +13,7 @@ import NepalInfo from './pages/nepalInfo';
 
 
 function App(props) {
+  document.title = 'कोरोना संक्र्मण तथ्यांक'
   const closeDrawer = (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
      setDrawer(false);
