@@ -22,29 +22,34 @@ const nepaliNumberFormat = (number) => {
 };
 
 export default function NepaliCardInfo() {
-  const classes = useStyles();
+  const classes = useStyles({});
   const [data, setData] = useState({});
   const [nepalData, setNepalData] = useState({});
-  console.log(nepalData);
+  const [allData, setAllData] = useState([]);
+
+  useEffect(() => {
+    const nepal = allData.filter((item, index) => item.country === "Nepal");
+    if (nepal) {
+      let tmp = nepal[0];
+      setNepalData(tmp);
+    }
+  }, [allData]);
+
+  useEffect(() => {
+    let temp = allData.filter((item) => item.country === "World");
+    let tmp = temp[0];
+    setData(tmp);
+  }, [allData]);
+
   const fetchData = () => {
     Axios.get("https://nepalcorona.info/api/v1/data/world")
       .then((res) => {
-        console.log(res.data)
-        setData(res.data[0]);
+        setAllData(res.data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
-      Axios.get("https://nepalcorona.info/api/v1/data/nepal")
-      .then((res) => {
-        setNepalData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
   return (
     <div className={classes.root}>
@@ -52,7 +57,7 @@ export default function NepaliCardInfo() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              {data._id ? (
+              {allData[0] && data ? (
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <img src={globe} alt="gobe" className={classes.globeIcon} />
@@ -60,33 +65,42 @@ export default function NepaliCardInfo() {
                   <Grid className={classes.worldData} item xs={12} sm={6}>
                     <Toolbar className={classes.worldData}>
                       <Typography>जम्मा संक्रमित :</Typography>
-                      <Typography color='primary' className={classes.numbers}>
+                      <Typography color="primary" className={classes.numbers}>
                         {nepaliNumberFormat(data.totalCases)}
                       </Typography>
                     </Toolbar>
-                    <Toolbar  className={classes.worldData}>
+                    <Toolbar className={classes.worldData}>
                       <Typography>कुल मृत्यु :</Typography>
-                      <Typography color='error' className={classes.numbers}>
+                      <Typography color="error" className={classes.numbers}>
                         {nepaliNumberFormat(data.totalDeaths)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>नयाँ संक्रमण :</Typography>
-                      <Typography color='error' className={classes.numbers}>
+                      <Typography color="error" className={classes.numbers}>
                         {nepaliNumberFormat(data.newCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>कुल निको भएको :</Typography>
-                      <Typography style={{color : '#34C307'}} className={classes.numbers}>
+                      <Typography
+                        style={{ color: "#34C307" }}
+                        className={classes.numbers}
+                      >
                         {nepaliNumberFormat(data.totalRecovered)}
                       </Typography>
                     </Toolbar>
-                    <Link style={{textDecoration: 'none'}} to='/worldinfo'><Button variant='contained' color='secondary' className={classes.moreInfo} >थप विबरण</Button></Link>
-
+                    <Link style={{ textDecoration: "none" }} to="/worldinfo">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.moreInfo}
+                      >
+                        थप विबरण
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
-               
               ) : (
                 <>
                   <Skeleton animation="wave" />
@@ -99,15 +113,12 @@ export default function NepaliCardInfo() {
                   <Skeleton animation="wave" />
                   <Skeleton animation="wave" />
                 </>
-
-               
               )}
-                
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              { nepalData.tested_positive ? (
+              {allData[0] && nepalData ? (
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <img src={nepal} alt="gobe" className={classes.nepalIcon} />
@@ -115,29 +126,40 @@ export default function NepaliCardInfo() {
                   <Grid item xs={12} sm={6}>
                     <Toolbar className={classes.worldData}>
                       <Typography>जम्मा संक्रमित :</Typography>
-                      <Typography color='primary' className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.tested_positive)}
+                      <Typography color="primary" className={classes.numbers}>
+                        {nepaliNumberFormat(nepalData.totalCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>कुल मृत्यु :</Typography>
-                      <Typography color='error' className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.deaths)}
+                      <Typography color="error" className={classes.numbers}>
+                        {nepaliNumberFormat(nepalData.totalDeaths)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>नयाँ संक्रमण :</Typography>
-                      <Typography color='error' className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.deaths)}
+                      <Typography color="error" className={classes.numbers}>
+                        {nepaliNumberFormat(nepalData.newCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
-                      <Typography  >कुल निको भएको :</Typography>
-                      <Typography style={{color : '#34C307'}} className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.recovered)}
+                      <Typography>कुल निको भएको :</Typography>
+                      <Typography
+                        style={{ color: "#34C307" }}
+                        className={classes.numbers}
+                      >
+                        {nepaliNumberFormat(nepalData.totalRecovered)}
                       </Typography>
                     </Toolbar>
-                    <Link style={{textDecoration: 'none'}} to='/nepalinfo'><Button variant='contained' color='secondary' className={classes.moreInfo} >थप विबरण</Button></Link>
+                    <Link style={{ textDecoration: "none" }} to="/nepalinfo">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.moreInfo}
+                      >
+                        थप विबरण
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
               ) : (
@@ -157,7 +179,6 @@ export default function NepaliCardInfo() {
           </Grid>
         </Grid>
       </Container>
-     
     </div>
   );
 }
@@ -196,6 +217,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   moreInfo: {
-    width : '100%',
+    width: "100%",
   },
 }));

@@ -128,7 +128,8 @@ export default function WoldInfo(props) {
         item.country !== "Africa" &&
         item.country !== "Asia" &&
         item.country !== "World" &&
-        item.country !== "South America" && item.country !== "Europe" &&
+        item.country !== "South America" &&
+        item.country !== "Europe" &&
         item.country !== "North America"
     );
     if (filterData) {

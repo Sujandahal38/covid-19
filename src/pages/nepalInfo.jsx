@@ -21,7 +21,6 @@ import {
 } from "nepali-number";
 import { Skeleton } from "@material-ui/lab";
 
-
 const nepaliNumberFormat = (number) => {
   const nepali = nepaliNumber(number);
   const finalNumber = nepaliFormat(nepali, "ne");
@@ -29,10 +28,11 @@ const nepaliNumberFormat = (number) => {
 };
 
 export default function NepalInfo(props) {
- const theme = useTheme();
+  const theme = useTheme();
   const classes = useStyles();
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
   const [nepalData, setNepalData] = React.useState([]);
+  const [woldometerData, setWorldometerData] = React.useState([]);
 
   const fetchData = () => {
     Axios.get("https://nepalcorona.info/api/v1/data/nepal")
@@ -40,88 +40,106 @@ export default function NepalInfo(props) {
         setNepalData(res.data);
       })
       .catch((err) => {
-        console.log(err);
+       
       });
+      Axios.get("https://nepalcorona.info/api/v1/data/world")
+      .then( res => {
+        let data = res.data.filter((item) => 
+          item.country === 'Nepal'
+        )
+        setWorldometerData(data)
+      } )
   };
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <>
-      {nepalData.tested_positive ? (
+      {nepalData.tested_positive && woldometerData[0] ? (
         <>
-        <Container>
-          <Grid>
-            <Grid item xs={12} sm={matches ? 12 : 6 }>
-              <Card className={classes.root} elevation={5}>
-                <CardHeader title="नेपाल" />
-                <CardMedia className={classes.media} image={nepal} />
-                <CardContent>
-                  <Grid container>
-                    <Grid item xs={12} sm={6}>
-                    <Toolbar className={classes.worldData}>
-                    <Typography>जम्मा संक्रमित :</Typography>
-                    <Typography color="primary" className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.tested_positive)}
-                    </Typography>
-                  </Toolbar>
-                  <Toolbar className={classes.worldData}>
-                    <Typography>कुल मृत्यु :</Typography>
-                    <Typography color="error" className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.deaths)}
-                    </Typography>
-                  </Toolbar>
-                  <Toolbar className={classes.worldData}>
-                    <Typography>नयाँ संक्रमण :</Typography>
-                    <Typography color="error" className={classes.numbers}>
-                      {nepaliNumberFormat(nepalData.deaths)}
-                    </Typography>
-                  </Toolbar>
-                  <Toolbar className={classes.worldData}>
-                    <Typography>कुल निको भएको :</Typography>
-                    <Typography
-                      style={{ color: "#34C307" }}
-                      className={classes.numbers}
-                    >
-                      {nepaliNumberFormat(nepalData.recovered)}
-                    </Typography>
-                  </Toolbar>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <Toolbar>
-                        <Typography className={classes.rightData}>
-                          जम्मा टेस्ट भएको :
-                        </Typography>
-                        <Typography color="primary" className={classes.numbers}>
-                          {nepaliNumberFormat(nepalData.tested_total)}
-                        </Typography>
-                      </Toolbar>
-                      <Toolbar>
-                        <Typography className={classes.rightData}>
-                        आइसोलेसनमा रखिएको :
-                        </Typography>
+          <Container>
+            <Grid>
+              <Grid item xs={12} sm={matches ? 12 : 6}>
+                <Card className={classes.root} elevation={5}>
+                  <CardHeader title="नेपाल" />
+                  <CardMedia className={classes.media} image={nepal} />
+                  <CardContent>
+                    <Grid container>
+                      <Grid item xs={12} sm={6}>
+                        <Toolbar className={classes.worldData}>
+                          <Typography>जम्मा संक्रमित :</Typography>
+                          <Typography
+                            color="primary"
+                            className={classes.numbers}
+                          >
+                            {nepaliNumberFormat(woldometerData[0].totalCases)}
+                          </Typography>
+                        </Toolbar>
+                        <Toolbar className={classes.worldData}>
+                          <Typography>कुल मृत्यु :</Typography>
+                          <Typography color="error" className={classes.numbers}>
+                            {nepaliNumberFormat(woldometerData[0].totalDeaths)}
+                          </Typography>
+                        </Toolbar>
+                        <Toolbar className={classes.worldData}>
+                          <Typography>नयाँ संक्रमण :</Typography>
+                          <Typography color="error" className={classes.numbers}>
+                           +{nepaliNumberFormat(woldometerData[0].newCases)}
+                          </Typography>
+                        </Toolbar>
+                        <Toolbar className={classes.worldData}>
+                          <Typography>कुल निको भएको :</Typography>
+                          <Typography
+                            style={{ color: "#34C307" }}
+                            className={classes.numbers}
+                          >
+                            {nepaliNumberFormat(woldometerData[0].totalRecovered)}
+                          </Typography>
+                        </Toolbar>
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <Toolbar>
+                          <Typography className={classes.rightData}>
+                            जम्मा टेस्ट भएको :
+                          </Typography>
+                          <Typography
+                            color="primary"
+                            className={classes.numbers}
+                          >
+                            {nepaliNumberFormat(nepalData.tested_total)}
+                          </Typography>
+                        </Toolbar>
+                        <Toolbar>
+                          <Typography className={classes.rightData}>
+                            आइसोलेसनमा रखिएको :
+                          </Typography>
 
-                        <Typography color="primary" className={classes.numbers}>
-                          {nepaliNumberFormat(nepalData.in_isolation)}
-                        </Typography>
-                      </Toolbar>
-                      <Toolbar>
-                        <Typography className={classes.rightData}>
-                          नतिजा आउन बाकी :
-                        </Typography>
-                        <Typography color="primary" className={classes.numbers}>
-                          {nepaliNumberFormat(nepalData.pending_result)}
-                        </Typography>
-                      </Toolbar>{" "}
+                          <Typography
+                            color="primary"
+                            className={classes.numbers}
+                          >
+                            {nepaliNumberFormat(nepalData.in_isolation)}
+                          </Typography>
+                        </Toolbar>
+                        <Toolbar>
+                          <Typography className={classes.rightData}>
+                            नतिजा आउन बाकी :
+                          </Typography>
+                          <Typography
+                            color="primary"
+                            className={classes.numbers}
+                          >
+                            {nepaliNumberFormat(nepalData.pending_result)}
+                          </Typography>
+                        </Toolbar>{" "}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                 
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
+          </Container>
         </>
       ) : (
         <>
@@ -164,7 +182,5 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: "56.25%", // 16:9
   },
-  rightData: {
-    
-  },
+  rightData: {},
 }));

@@ -23,7 +23,7 @@ import Moment from "react-moment";
 
 export default function News(props) {
   const [news, setNews] = useState([]);
-  
+
   useEffect(() => {
     Axios.get(`https://nepalcorona.info/api/v1/news?limit=${props.newsLength}`)
       .then((res) => {
@@ -42,13 +42,15 @@ export default function News(props) {
 
   return (
     <>
-    {!props.hideHeader ?
-      <Paper className={classes.holder}>
-        <Toolbar className={classes.header}>
-          <Typography style={{color: 'white'}} variant="h6">समाचारहरु </Typography>
-        </Toolbar>
-      </Paper>
-   : null}
+      {!props.hideHeader ? (
+        <Paper className={classes.holder}>
+          <Toolbar className={classes.header}>
+            <Typography style={{ color: "white" }} variant="h6">
+              समाचारहरु{" "}
+            </Typography>
+          </Toolbar>
+        </Paper>
+      ) : null}
 
       <div className={classes.root}>
         {news[0] ? (
@@ -76,7 +78,7 @@ export default function News(props) {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{textAlign: 'justify' ,color: 'black'}}
+                      style={{ textAlign: "justify", color: "black" }}
                     >
                       {item.summary}
                     </Typography>
@@ -99,12 +101,12 @@ export default function News(props) {
           </Container>
         ) : (
           <div className={classes.spinnerContainer}>
-          <Toolbar className={classes.spinerHolder}>
-            <CircularProgress
-              variant="indeterminate"
-              className={classes.spinner}
-            />
-          </Toolbar>
+            <Toolbar className={classes.spinerHolder}>
+              <CircularProgress
+                variant="indeterminate"
+                className={classes.spinner}
+              />
+            </Toolbar>
           </div>
         )}
       </div>
@@ -136,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   spinnerContainer: {
-    height: '1000px'
+    height: "1000px",
   },
   holder: {
     marginTop: theme.spacing(3),
