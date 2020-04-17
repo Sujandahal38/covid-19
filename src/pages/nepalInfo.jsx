@@ -21,6 +21,7 @@ import {
 } from "nepali-number";
 import { Skeleton } from "@material-ui/lab";
 
+
 const nepaliNumberFormat = (number) => {
   const nepali = nepaliNumber(number);
   const finalNumber = nepaliFormat(nepali, "ne");
@@ -49,6 +50,7 @@ export default function NepalInfo(props) {
   return (
     <>
       {nepalData.tested_positive ? (
+        <>
         <Container>
           <Grid>
             <Grid item xs={12} sm={matches ? 12 : 6 }>
@@ -120,6 +122,7 @@ export default function NepalInfo(props) {
             </Grid>
           </Grid>
         </Container>
+        </>
       ) : (
         <>
           <Skeleton animation="wave" />

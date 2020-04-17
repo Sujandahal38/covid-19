@@ -8,7 +8,6 @@ import WorldInfo from "./pages/worldInfo";
 import Footer from './components/footer/footer';
 import DrawerMenu from './components/drawer/drawerMenu';
 import News from './components/cards/News';
-import 'antd/dist/antd.css';
 import NepalInfo from './pages/nepalInfo';
 
 
