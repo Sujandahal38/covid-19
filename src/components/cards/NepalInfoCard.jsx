@@ -78,7 +78,7 @@ export default function NepaliCardInfo() {
                     <Toolbar className={classes.worldData}>
                       <Typography>नयाँ संक्रमण :</Typography>
                       <Typography color="error" className={classes.numbers}>
-                        {nepaliNumberFormat(data.newCases)}
+                        + {nepaliNumberFormat(data.newCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
@@ -139,7 +139,7 @@ export default function NepaliCardInfo() {
                     <Toolbar className={classes.worldData}>
                       <Typography>नयाँ संक्रमण :</Typography>
                       <Typography color="error" className={classes.numbers}>
-                        {nepaliNumberFormat(nepalData.newCases)}
+                        + {nepaliNumberFormat(nepalData.newCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
