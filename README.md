@@ -1,7 +1,7 @@
 
 #Covid-19 Reports, News && STATS 
  ###using material UI
-
+DEPLOYED ON : [https://www.dahalsujan.com.np]
 ## Available Scripts
 
 In the project directory, you can run:
