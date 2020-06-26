@@ -9,15 +9,15 @@ import {
 import { HomeSharp, EventNoteSharp, PublicOutlined, ExploreSharp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-export default function DrawerMenu(props) {
+export default function DrawerMenu({drawer, closeDrawer}) {
   const classes = useStyles();
   return (
     <>
       <Drawer
-        onClose={props.closeDrawer}
-        anchor="left"
+        onClose={closeDrawer}
+        anchor={"left"}
         elevation={15}
-        open={props.drawer}
+        open={drawer}
       >
         <div className={classes.drawer}>
           <List className={classes.root}>
@@ -45,7 +45,7 @@ export default function DrawerMenu(props) {
             <Link style={{textDecoration: "none"}} to='/nepalinfo'>
               <Button className={classes.iconButton}><ExploreSharp style={{ marginRight: "13px" }} /> नेपालको तथ्यांक </Button>
               </Link>
-          
+
             </ListItem>
           </List>
         </div>
@@ -55,12 +55,6 @@ export default function DrawerMenu(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
-  iconButton: {
-   
-  },
-  drawer: {
-
-  },
   root: {
     marginTop: theme.spacing(5),
   },

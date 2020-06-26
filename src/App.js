@@ -9,6 +9,7 @@ import Footer from './components/footer/footer';
 import DrawerMenu from './components/drawer/drawerMenu';
 import News from './components/cards/News';
 import NepalInfo from './pages/nepalInfo';
+import ToTop from './components/floatingButton/ToTop';
 
 
 function App(props) {
@@ -23,26 +24,27 @@ function App(props) {
   const openDrawer = () => {
     setDrawer(true);
   }
- 
+
 
   return (
     <div className="App">
-    
-   
+
+
     <Router>
     <SocialBar/>
     <Header openDrawer={openDrawer} />
       <DrawerMenu drawer={drawer} closeDrawer={closeDrawer}/>
         <Switch>
-        <Route exact path='/' render={props => <HomePage/> } /> 
+        <Route exact path='/' render={props => <HomePage/> } />
         <Route path ='/worldinfo' render={ props => <WorldInfo/> } />
         <Route  path= '/nepalinfo' render={props => <NepalInfo/>} />
         <Route path='/news' render={props => <News hideHeader={true} newsLength={100} />} />
         </Switch>
         <Footer/>
+        <ToTop/>
     </Router>
-  
-   
+
+
     </div>
   );
 }
