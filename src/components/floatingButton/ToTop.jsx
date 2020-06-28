@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Fab, Zoom } from '@material-ui/core';
+import { makeStyles, Zoom, Fab } from '@material-ui/core';
 import { ArrowUpward } from '@material-ui/icons';
 import { useState } from 'react';
 
@@ -16,20 +16,17 @@ const ToTop = () => {
     }
   };
   const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0 });
   };
 
   window.addEventListener('scroll', scrollToTop);
 
   return (
     <>
-    <Zoom in={showButton} timeout={500}>
-      <Fab
-        onClick={scrollTop}
-        className={showButton ? classes.button : classes.hideButton}
-      >
-        <ArrowUpward />
-      </Fab>
+      <Zoom in={!!showButton} timeout={500}>
+        <Fab className={classes.button} onClick={scrollTop} >
+            <ArrowUpward/>
+        </Fab>
       </Zoom>
     </>
   );
