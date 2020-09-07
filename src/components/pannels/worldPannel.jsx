@@ -32,7 +32,6 @@ export default function WorldPannel(props) {
   const [italy, setItaly] = React.useState({});
   const [india, setIndaia] = React.useState({});
   const classes = useStyles();
-  console.log(america);
   useEffect(() => {
     setAmerica(props.data.filter((item) => item.country === "USA"));
     setSpain(props.data.filter((item) => item.country === "Spain"));

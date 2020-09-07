@@ -189,6 +189,7 @@ export default function WoldInfo(props) {
                         const value = row[column.id];
                         return (
                           <TableCell
+                          key = {column.id}
                             indec={column.id}
                             style={column.style}
                             align={column.align}

@@ -1,26 +1,10 @@
 import React from 'react';
 import { makeStyles, Zoom, Fab } from '@material-ui/core';
 import { ArrowUpward } from '@material-ui/icons';
-import { useState } from 'react';
 
-const ToTop = () => {
-  const [showButton, setShowButton] = useState(false);
+const ToTop = ({showButton, scrollTop}) => {
+
   const classes = useStyles();
-
-  const scrollToTop = () => {
-    if (window.pageYOffset > 1200) {
-      setShowButton(true);
-    }
-    if (window.pageYOffset < 1200) {
-      setShowButton(false);
-    }
-  };
-  const scrollTop = () => {
-    window.scrollTo({ top: 0 });
-  };
-
-  window.addEventListener('scroll', scrollToTop);
-
   return (
     <>
       <Zoom in={!!showButton} timeout={500}>
