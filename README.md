@@ -1,7 +1,7 @@
 
-#Covid-19 Reports, News && STATS 
- ###using material UI
-DEPLOYED ON : [https://www.dahalsujan.com.np]
+# Covid-19 Reports, News && STATS 
+ ### using material UI
+DEPLOYED ON : 
 ## Available Scripts
 
 In the project directory, you can run:
@@ -19,4 +19,4 @@ You will also see any lint errors in the console.
 Installs all the dependencies from (package.json)
 
 
-###  
+
