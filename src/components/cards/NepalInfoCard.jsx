@@ -4,7 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Container, Typography, Toolbar, Button } from "@material-ui/core";
 import globe from "../../assets/icons/world .svg";
-import nepal from "../../assets/icons/nepal.svg";
+import NepalFlag from "../../assets/icons/nepal.svg";
+
 import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
@@ -24,40 +25,27 @@ const nepaliNumberFormat = (number) => {
 export default function NepaliCardInfo() {
   const classes = useStyles({});
   const [data, setData] = useState({});
-  const [nepalData, setNepalData] = useState({});
-  const [allData, setAllData] = useState([]);
-
-  useEffect(() => {
-    const nepal = allData.filter((item, index) => item.country === "Nepal");
-    if (nepal) {
-      let tmp = nepal[0];
-      setNepalData(tmp);
-    }
-  }, [allData]);
-
-  useEffect(() => {
-    let temp = allData.filter((item) => item.country === "World");
-    let tmp = temp[0];
-    setData(tmp);
-  }, [allData]);
+  const [nepal, setNepal] = useState({});
 
   const fetchData = () => {
-    Axios.get("https://nepalcorona.info/api/v1/data/world")
+    Axios.get("https://corona.askbhunte.com/api/v1/data/world")
       .then((res) => {
-        setAllData(res.data);
+        setNepal(res.data.filter((item) => item.country === "Nepal")[0]);
+        setData(res.data[0]);
       })
       .catch((err) => {});
   };
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div className={classes.root}>
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              {allData[0] && data ? (
+              {data.totalCases ? (
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <img src={globe} alt="gobe" className={classes.globeIcon} />
@@ -118,28 +106,28 @@ export default function NepaliCardInfo() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
-              {allData[0] && nepalData ? (
+              {nepal.totalCases && data ? (
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
-                    <img src={nepal} alt="gobe" className={classes.nepalIcon} />
+                    <img src={NepalFlag} alt="gobe" className={classes.nepalIcon} />
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Toolbar className={classes.worldData}>
                       <Typography>जम्मा संक्रमित :</Typography>
                       <Typography color="primary" className={classes.numbers}>
-                        {nepaliNumberFormat(nepalData.totalCases)}
+                        {nepaliNumberFormat(nepal.totalCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>कुल मृत्यु :</Typography>
                       <Typography color="error" className={classes.numbers}>
-                        {nepaliNumberFormat(nepalData.totalDeaths)}
+                        {nepaliNumberFormat(nepal.totalDeaths)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
                       <Typography>नयाँ संक्रमण :</Typography>
                       <Typography color="error" className={classes.numbers}>
-                        + {nepaliNumberFormat(nepalData.newCases)}
+                        + {nepaliNumberFormat(nepal.newCases)}
                       </Typography>
                     </Toolbar>
                     <Toolbar className={classes.worldData}>
@@ -148,7 +136,7 @@ export default function NepaliCardInfo() {
                         style={{ color: "#34C307" }}
                         className={classes.numbers}
                       >
-                        {nepaliNumberFormat(nepalData.totalRecovered)}
+                        {nepaliNumberFormat(nepal.totalRecovered)}
                       </Typography>
                     </Toolbar>
                     <Link style={{ textDecoration: "none" }} to="/nepalinfo">

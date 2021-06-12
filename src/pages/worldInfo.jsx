@@ -151,12 +151,12 @@ export default function WoldInfo(props) {
   }, [data]);
 
   useEffect(() => {
-    Axios.get("https://nepalcorona.info/api/v1/data/world")
+    Axios.get("https://corona.askbhunte.com/api/v1/data/world")
       .then((res) => {
         setData(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   }, []);
 

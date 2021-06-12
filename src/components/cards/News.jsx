@@ -25,13 +25,13 @@ export default function News(props) {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    Axios.get(`https://nepalcorona.info/api/v1/news?limit=${props.newsLength}`)
+    Axios.get(`https://corona.askbhunte.com/api/v1/news?limit=${props.newsLength}`)
       .then((res) => {
         const data = res.data.data.filter((item) => item.lang === "np");
         setNews(data);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
   }, [props.newsLength]);
 

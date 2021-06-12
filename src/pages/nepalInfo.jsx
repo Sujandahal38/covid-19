@@ -35,22 +35,22 @@ export default function NepalInfo(props) {
   const [woldometerData, setWorldometerData] = React.useState([]);
 
   const fetchData = () => {
-    Axios.get("https://nepalcorona.info/api/v1/data/nepal")
+    Axios.get("https://corona.askbhunte.com/api/v1/data/nepal")
       .then((res) => {
         setNepalData(res.data);
       })
       .catch((err) => {
-       
+
       });
-      Axios.get("https://nepalcorona.info/api/v1/data/world")
+      Axios.get("https://corona.askbhunte.com/api/v1/data/world")
       .then( res => {
-        let data = res.data.filter((item) => 
+        let data = res.data.filter((item) =>
           item.country === 'Nepal'
         )
         setWorldometerData(data)
       } )
   };
- 
+
   useEffect(() => {
     fetchData();
   }, []);
